@@ -1,6 +1,7 @@
 <script lang="ts">
+    import "./layout.css";
     import { type Snippet } from "svelte";
-    let { children }: {children: Snippet} = $props();
+    let { children }: { children: Snippet } = $props();
 </script>
 
 <div class="app">
@@ -14,6 +15,7 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        margin: 0;
     }
 
     main {

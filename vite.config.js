@@ -12,5 +12,17 @@ export default defineConfig({
         rules: { "vite-plus/prefer-vite-plus-imports": "error" },
         options: { typeAware: true, typeCheck: true },
     },
-    plugins: lazyPlugins(() => [tailwindcss(), sveltekit()]),
+    plugins: lazyPlugins(() => [
+        tailwindcss(),
+        sveltekit({
+            experimental: {
+                remoteFunctions: true,
+            },
+            compilerOptions: {
+                experimental: {
+                    async: true,
+                },
+            },
+        }),
+    ]),
 });
