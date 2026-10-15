@@ -1,18 +1,24 @@
 @import "tailwindcss";
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/space-grotesk";
 
 :root {
     --font-body:
         "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --col-bg: rgb(202, 216, 228);
-    --col-text: rgba(0, 0, 0, 1);
+    --font-heading: "Space Grotesk Variable", "Geist Variable", Roboto, sans-serif;
+
+    --col-bg: #b8f3ef;
+    --col-text: #1a2827;
+    --col-fill: color(from var(--col-text) srgb r g b / 0.925);
 
     --border-width: 1px;
     --border-style: solid;
-    --border-color: #252525;
+    --border-color: var(--col-text);
     --border: var(--border-width) var(--border-style) var(--border-color);
 
+    --rounded-sm: 4px;
     --rounded-md: 8px;
+    --rounded-lg: 12px;
 
     font-family: var(--font-body);
     font-weight: 400;
@@ -34,6 +40,7 @@ body {
 }
 
 h1 {
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 800;
 }

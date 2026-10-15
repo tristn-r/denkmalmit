@@ -5,6 +5,7 @@
 
     let { post }: { post: Post } = $props();
     let time = $state("");
+    let likeness = $state(0);
 
     $effect(() => {
         const date = new Date(post.time);
@@ -25,17 +26,27 @@
     <h1>{post.text}</h1>
     <span class="voting">
         <button
+            style="--anim-direciton: -1"
+            class="vote-button"
+            class:like={likeness === 1}
             onclick={() => {
-                likePost({ id: post.id, likeness: 1 }).then((data) =>
-                    console.log(data),
-                );
-            }}><ThumbsUp /></button
+                likeness = likeness > 0 ? 0 : 1;
+                likePost({ id: post.id, likeness: likeness === 0 ? -1 : 1 });
+            }}
         >
+            <ThumbsUp fill={likeness > 0 ? "var(--col-fill)" : "#0000"} />
+        </button>
         <button
+            style="--anim-direciton: 1"
+            class="vote-button"
+            class:unlike={likeness === -1}
             onclick={() => {
-                likePost({ id: post.id, likeness: -1 });
-            }}><ThumbsDown /></button
+                likeness = likeness < 0 ? 0 : -1;
+                likePost({ id: post.id, likeness: likeness === 0 ? 1 : -1 });
+            }}
         >
+            <ThumbsDown fill={likeness < 0 ? "var(--col-fill)" : "#0000"} />
+        </button>
     </span>
 </div>
 
@@ -61,5 +72,25 @@
     .voting {
         display: flex;
         gap: 4px;
+    }
+    .vote-button {
+        cursor: pointer;
+    }
+    .like {
+        animation: like 0.5s ease-in-out;
+    }
+    .unlike {
+        animation: unlike 0.5s ease-in-out;
+    }
+
+    @keyframes like {
+        50% {
+            transform: translateY(-1rem);
+        }
+    }
+    @keyframes unlike {
+        50% {
+            transform: translateY(1rem);
+        }
     }
 </style>

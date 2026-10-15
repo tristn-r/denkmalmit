@@ -12,12 +12,15 @@ export const likePost = command(schema, async ({ id, likeness }) => {
     if (post.success) {
         const result = await db
             .from("posts")
-            .update(post.data[0].relevance + likeness)
-            .eq("id", id);
+            .update({ relevance: post.data[0].relevance + likeness })
+            .eq("id", id)
+            .select();
+
         if (result.success)
             return {
                 success: true,
             };
+
         return {
             success: false,
             message: `Unable to update post ${id}`,
