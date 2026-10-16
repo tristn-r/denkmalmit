@@ -1,6 +1,7 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, lazyPlugins } from "vite-plus";
+import adapter from "@sveltejs/adapter-vercel";
 
 export default defineConfig({
     staged: {
@@ -15,6 +16,7 @@ export default defineConfig({
     plugins: lazyPlugins(() => [
         tailwindcss(),
         sveltekit({
+            adapter: adapter(),
             experimental: {
                 remoteFunctions: true,
             },
