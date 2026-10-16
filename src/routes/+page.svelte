@@ -5,6 +5,9 @@
     import { db } from "$lib/db";
     import { onMount } from "svelte";
     import { flip } from "svelte/animate";
+    import ModalTrigger from "$lib/components/ModalTrigger.svelte";
+    import ModalContent from "$lib/components/ModalContent.svelte";
+    import Modal from "$lib/components/Modal.svelte";
 
     const { data }: PageProps = $props();
 
@@ -24,7 +27,6 @@
                 },
                 (payload) => {
                     posts = [payload.new as Post, ...posts];
-                    console.log(posts);
                 },
             )
             .on(
@@ -50,7 +52,6 @@
                 },
                 (payload) => {
                     posts = posts.filter((post) => post.id != payload.old.id);
-                    console.log(posts);
                 },
             )
             .subscribe();
@@ -72,6 +73,12 @@
             <PostComponent {post} />
         </div>
     {/each}
+    <Modal>
+        <ModalTrigger>Frage stellen</ModalTrigger>
+        <ModalContent>
+            <h1>Cool Modal</h1>
+        </ModalContent>
+    </Modal>
 </section>
 
 <style>

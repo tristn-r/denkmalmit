@@ -19,7 +19,7 @@
     --rounded-sm: 4px;
     --rounded-md: 8px;
     --rounded-lg: 12px;
-
+    --rounding: var(--rounded-md);
     font-family: var(--font-body);
     font-weight: 400;
     font-style: normal;

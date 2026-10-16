@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Post } from "$lib/database.types";
     import { ThumbsDown, ThumbsUp } from "@lucide/svelte";
-    import { likePost } from "./post.remote";
+    import { likePost } from "$lib/remote/post.remote";
 
     let { post }: { post: Post } = $props();
     let time = $state("");
@@ -56,7 +56,7 @@
         flex-direction: column;
         padding: 5px;
         border: var(--border);
-        border-radius: var(--rounded-md);
+        border-radius: var(--rounding);
 
         & h1 {
             margin: 15px;
