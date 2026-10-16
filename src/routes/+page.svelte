@@ -1,13 +1,13 @@
 <script lang="ts">
     import type { PageProps } from "./$types";
-    import type { Post } from "$lib/database.types";
-    import PostComponent from "$lib/components/Post.svelte";
-    import { db } from "$lib/db";
+    import type { Post } from "#lib/database.types.js";
+    import PostComponent from "#lib/components/Post.svelte";
+    import { db } from "#lib/db.js";
     import { onMount } from "svelte";
     import { flip } from "svelte/animate";
-    import ModalTrigger from "$lib/components/ModalTrigger.svelte";
-    import ModalContent from "$lib/components/ModalContent.svelte";
-    import Modal from "$lib/components/Modal.svelte";
+    import ModalTrigger from "#lib/components/ModalTrigger.svelte";
+    import ModalContent from "#lib/components/ModalContent.svelte";
+    import Modal from "#lib/components/Modal.svelte";
 
     const { data }: PageProps = $props();
 
@@ -74,9 +74,9 @@
         </div>
     {/each}
     <Modal>
-        <ModalTrigger>Frage stellen</ModalTrigger>
+        <ModalTrigger id="post-form-trigger">Frage stellen</ModalTrigger>
         <ModalContent>
-            <h1>Cool Modal</h1>
+            <h1>Frage formulieren</h1>
         </ModalContent>
     </Modal>
 </section>
@@ -93,5 +93,18 @@
 
     .wrapper {
         width: 100%;
+    }
+
+    :global(#post-form-trigger) {
+        background-color: white;
+        border: none;
+        position: fixed;
+        bottom: 30px;
+        box-shadow: 0 0 6px 2px #0004;
+        transition: 0.15s ease-out;
+
+        &:active {
+            scale: 0.97;
+        }
     }
 </style>

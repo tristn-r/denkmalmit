@@ -16,18 +16,10 @@ export default defineConfig({
     plugins: lazyPlugins(() => [
         tailwindcss(),
         sveltekit({
-            adapter: adapter(),
-            paths: {
-                base: "",
-            },
-            experimental: {
-                remoteFunctions: true,
-            },
-            compilerOptions: {
-                experimental: {
-                    async: true,
-                },
-            },
+            adapter: adapter({}),
+            paths: { base: "" },
+            experimental: { remoteFunctions: true },
+            compilerOptions: { experimental: { async: true } },
         }),
     ]),
 });

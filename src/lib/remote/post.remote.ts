@@ -1,5 +1,5 @@
 import { command } from "$app/server";
-import { db } from "$lib/db";
+import { db } from "#lib/db.js";
 import { z } from "zod";
 
 const schema = z.object({

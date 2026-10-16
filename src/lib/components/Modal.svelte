@@ -1,6 +1,6 @@
 <script lang="ts">
     import { type Snippet } from "svelte";
-    import { setModalContext } from "$lib/context/modalContext";
+    import { setModalContext } from "#lib/context/modalContext.js";
 
     let { children }: { children: Snippet } = $props();
     let isOpen = $state(false);
