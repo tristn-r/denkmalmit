@@ -17,6 +17,9 @@ export default defineConfig({
         tailwindcss(),
         sveltekit({
             adapter: adapter(),
+            paths: {
+                base: "",
+            },
             experimental: {
                 remoteFunctions: true,
             },

@@ -1,8 +1,11 @@
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-    // kit: {
-    //     adapter: adapter({}),
-    // },
+    kit: {
+        adapter: adapter({}),
+        paths: {
+            base: "",
+        },
+    },
 };
 
 export default config;
