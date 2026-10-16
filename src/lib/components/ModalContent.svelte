@@ -8,10 +8,52 @@
         children: Snippet;
     } = $props();
 
-    const modal = getModalContext();
+    const context = getModalContext();
+    let modal: HTMLDivElement | undefined = $state();
+    let dragTranslation = $state(0);
+    let dragStartPos = $state(-1);
+
+    function dragStart(posY: number) {
+        if (modal) {
+            if (context.isOpen && posY < modal.offsetTop) context.close();
+            else if (
+                context.isOpen &&
+                modal &&
+                posY >= modal.offsetTop - 10 &&
+                posY <= modal.offsetTop + 20
+            )
+                dragStartPos = posY;
+        }
+    }
+    function dragMove(posY: number) {
+        if (dragStartPos > 0) dragTranslation = posY - dragStartPos;
+    }
+    function dragEnd() {
+        dragStartPos = -1;
+        if (modal && modal.offsetTop + dragTranslation > modal.clientHeight / 2)
+            context.close();
+        dragTranslation = 0;
+    }
 </script>
 
-<div class:hidden={!modal.isOpen} class="modal">
+<svelte:window
+    onmousedown={(e) => dragStart(e.clientY)}
+    ontouchstart={(e) => dragStart(e.touches[0].clientY)}
+    onmousemove={(e) => dragMove(e.clientY)}
+    ontouchmove={(e) => dragMove(e.touches[0].clientY)}
+    onmouseup={(_) => dragEnd}
+    ontouchend={(_) => dragEnd}
+/>
+
+<div
+    bind:this={modal}
+    class:hidden={!context.isOpen}
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    style={"translate: 0 " + dragTranslation + "px"}
+>
+    <!-- <div draggable="true" class="handle"></div> -->
     {@render children?.()}
 </div>
 
