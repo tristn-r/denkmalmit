@@ -10,45 +10,62 @@
     } = $props();
 
     const context = getModalContext();
+    let modal: HTMLDialogElement | undefined = $state();
     let screenHeight = $state(0);
 
+    $effect(() => {
+        if (context.isOpen) if (modal) modal.showModal();
+    });
+
+    function closeModal() {
+        context.close();
+        if (modal) modal.close();
+    }
+
     function handleClick(e: MouseEvent) {
-        if (e.y < screenHeight * 0.1) {
-            context.close();
-        }
+        if (e.y < screenHeight * 0.1) closeModal();
     }
 </script>
 
 <svelte:window onclick={handleClick} bind:innerHeight={screenHeight} />
 
-<div
-    class:hidden={!context.isOpen}
-    class="modal"
-    role="dialog"
-    aria-modal="true"
->
-    <button class="close" onclick={context.close}>
+<dialog bind:this={modal} class="modal">
+    <button class="close" onclick={(_) => closeModal()} type="button">
         <X size="2rem" color="var(--col-text)" />
     </button>
-    {@render children?.()}
-</div>
+    <form method="dialog">
+        {@render children?.()}
+    </form>
+</dialog>
 
 <style>
     .modal {
+        max-width: none;
+        max-height: none;
+
         position: fixed;
-        top: 10%;
-        animation: 0.2s fly-in ease-out forwards;
-        width: 100%;
+        margin: auto;
+        top: 20%;
+        width: min(100%, 750px);
         height: 100%;
+        animation: 0.2s fly-in ease-out;
         background-color: #fff;
         border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;
-        display: flex;
         flex-direction: column;
         padding: 0.4rem 0.8rem;
         touch-action: none;
-    }
-    .hidden {
-        animation: 0.2s fly-out ease-out forwards;
+        box-shadow: 0 0 10px 5px #fff5;
+
+        &[open] {
+            display: block;
+        }
+        &:not([open]) {
+            display: flex;
+            animation: 0.2s fly-out ease-out forwards;
+        }
+        &::backdrop {
+            background-color: #0003;
+        }
     }
 
     .close {
