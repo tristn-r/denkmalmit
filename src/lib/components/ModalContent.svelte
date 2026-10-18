@@ -68,7 +68,7 @@
 
 <style>
     .modal {
-        position: absolute;
+        position: fixed;
         top: calc(10% + attr(data-offset type(<length>)));
         /* animation: 0.2s fly ease-out; */
         width: 100%;
@@ -89,6 +89,7 @@
         top: 10px;
         left: 50%;
         transform: translateX(-50%);
+        cursor: grab;
     }
 
     .hidden {

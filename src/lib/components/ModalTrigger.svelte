@@ -13,7 +13,7 @@
     const modal = getModalContext();
 </script>
 
-<button {id} class={["modal-trigger"]} onclick={modal.open}>
+<button {id} class="modal-trigger" onclick={modal.open}>
     {@render children?.()}
 </button>
 
@@ -24,5 +24,6 @@
         padding: 4px 8px;
         border: var(--border);
         border-radius: var(--rounding);
+        cursor: pointer;
     }
 </style>
