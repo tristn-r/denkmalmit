@@ -5,10 +5,7 @@
     import { db } from "#lib/db.js";
     import { onMount } from "svelte";
     import { flip } from "svelte/animate";
-    import ModalTrigger from "#lib/components/ModalTrigger.svelte";
-    import ModalContent from "#lib/components/ModalContent.svelte";
-    import Modal from "#lib/components/Modal.svelte";
-    import ModalContentX from "#lib/components/ModalContentX.svelte";
+    import PostModal from "#lib/components/PostModal.svelte";
 
     const { data }: PageProps = $props();
 
@@ -74,12 +71,7 @@
             <PostComponent {post} />
         </div>
     {/each}
-    <Modal>
-        <ModalTrigger id="post-form-trigger">Frage stellen</ModalTrigger>
-        <ModalContentX>
-            <h1>Frage formulieren</h1>
-        </ModalContentX>
-    </Modal>
+    <PostModal />
 </section>
 
 <style>
@@ -89,23 +81,10 @@
         justify-content: center;
         align-items: center;
         flex: 0.6;
-        gap: 8px;
+        gap: 16px;
     }
 
     .wrapper {
         width: 100%;
-    }
-
-    :global(#post-form-trigger) {
-        background-color: white;
-        border: 2px solid var(--col-text);
-        position: fixed;
-        bottom: 30px;
-        /* box-shadow: 0 0 6px 2px #0004; */
-        transition: 0.15s ease-out;
-
-        &:active {
-            scale: 0.97;
-        }
     }
 </style>

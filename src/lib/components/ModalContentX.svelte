@@ -14,7 +14,15 @@
     let screenHeight = $state(0);
 
     $effect(() => {
-        if (context.isOpen) if (modal) modal.showModal();
+        if (!modal) return;
+        modal.addEventListener("close", () => {
+            context.close();
+        });
+    });
+
+    $effect(() => {
+        if (!context.isOpen || !modal) return;
+        modal.showModal();
     });
 
     function closeModal() {

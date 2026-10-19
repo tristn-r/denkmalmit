@@ -26,26 +26,24 @@
     <h1>{post.text}</h1>
     <span class="voting">
         <button
-            style="--anim-direciton: -1"
             class="vote-button"
-            class:like={likeness === 1}
+            class:active={likeness === 1}
             onclick={() => {
                 likeness = likeness > 0 ? 0 : 1;
                 likePost({ id: post.id, likeness: likeness === 0 ? -1 : 1 });
             }}
         >
-            <ThumbsUp fill={likeness > 0 ? "var(--col-fill)" : "#0000"} />
+            <ThumbsUp fill={likeness > 0 ? "#0002" : "#fff"} />
         </button>
         <button
-            style="--anim-direciton: 1"
             class="vote-button"
-            class:unlike={likeness === -1}
+            class:active={likeness === -1}
             onclick={() => {
                 likeness = likeness < 0 ? 0 : -1;
                 likePost({ id: post.id, likeness: likeness === 0 ? 1 : -1 });
             }}
         >
-            <ThumbsDown fill={likeness < 0 ? "var(--col-fill)" : "#0000"} />
+            <ThumbsDown fill={likeness < 0 ? "#0002" : "#fff"} />
         </button>
     </span>
 </div>
@@ -57,12 +55,16 @@
         padding: 5px;
         border: var(--border);
         border-radius: var(--rounding);
-        background-color: #fff3;
+        background-color: var(--col-bg);
+        box-shadow: 4px 4px #000;
 
         & h1 {
             margin: 15px;
             line-height: 0.92;
         }
+        /* &:hover h1 { */
+        /*     text-decoration: underline; */
+        /* } */
     }
 
     .time {
@@ -76,22 +78,25 @@
     }
     .vote-button {
         cursor: pointer;
+        filter: drop-shadow(2px 2px #000);
+        transition:
+            translate 0.2s ease,
+            filter 0.2s ease-in,
+            fill 0.2s ease-in;
     }
-    .like {
-        animation: like 0.5s ease-in-out;
-    }
-    .unlike {
-        animation: unlike 0.5s ease-in-out;
+    .active {
+        filter: drop-shadow(0px 0px #000);
+        translate: 2px 2px;
     }
 
-    @keyframes like {
-        50% {
-            transform: translateY(-1rem);
-        }
-    }
-    @keyframes unlike {
-        50% {
-            transform: translateY(1rem);
-        }
-    }
+    /* @keyframes like { */
+    /*     50% { */
+    /*         transform: translateY(-1rem); */
+    /*     } */
+    /* } */
+    /* @keyframes unlike { */
+    /*     50% { */
+    /*         transform: translateY(1rem); */
+    /*     } */
+    /* } */
 </style>
