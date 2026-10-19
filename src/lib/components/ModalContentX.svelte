@@ -2,6 +2,7 @@
     import { X } from "@lucide/svelte";
     import { type Snippet } from "svelte";
     import { getModalContext } from "#lib/context/modalContext.js";
+    import Button from "./Button.svelte";
 
     let {
         children,
@@ -38,9 +39,9 @@
 <svelte:window onclick={handleClick} bind:innerHeight={screenHeight} />
 
 <dialog bind:this={modal} class="modal">
-    <button class="close" onclick={(_) => closeModal()} type="button">
+    <Button id="close" onclick={(_) => closeModal()} type="button">
         <X size="2rem" color="var(--col-text)" />
-    </button>
+    </Button>
     <form method="dialog">
         {@render children?.()}
     </form>
@@ -76,7 +77,7 @@
         }
     }
 
-    .close {
+    :global(#close) {
         position: absolute;
         top: 1rem;
         right: 0.8rem;

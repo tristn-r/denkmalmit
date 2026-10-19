@@ -1,4 +1,5 @@
 <script>
+    import Button from "./Button.svelte";
     import Modal from "./Modal.svelte";
     import ModalContentX from "./ModalContentX.svelte";
     import ModalTrigger from "./ModalTrigger.svelte";
@@ -12,7 +13,7 @@
             <p>Name <span class="optional">optional</span></p>
             <input type="text" class="form-input" />
         </label>
-        <button type="submit">Frage absenden</button>
+        <Button type="submit">Frage absenden</Button>
     </ModalContentX>
 </Modal>
 
