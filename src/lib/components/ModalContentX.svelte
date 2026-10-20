@@ -59,7 +59,7 @@
         height: 100%;
         animation: 0.2s fly-in ease-out;
         background-color: #fff;
-        border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;
+        /* border-radius: var(--rounded-xl) var(--rounded-xl) 0 0; */
         flex-direction: column;
         padding: 0.4rem 0.8rem;
         touch-action: none;

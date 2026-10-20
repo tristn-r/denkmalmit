@@ -1,6 +1,17 @@
 <script lang="ts">
     import type { Post } from "#lib/database.types.js";
-    import { ThumbsDown, ThumbsUp } from "@lucide/svelte";
+    import {
+        ArrowDown,
+        ArrowUp,
+        ChevronDown,
+        ChevronUp,
+        CircleChevronDown,
+        CircleChevronUp,
+        SquareChevronDown,
+        SquareChevronUp,
+        ThumbsDown,
+        ThumbsUp,
+    } from "@lucide/svelte";
     import { likePost } from "#lib/remote/post.remote.js";
     import Button from "./Button.svelte";
 
@@ -25,28 +36,29 @@
         {time}
     </span>
     <h1>{post.text}</h1>
-    <!-- class:active={likeness === 1} -->
     <span class="voting">
         <Button
-            id={likeness === 1 ? "active" : ""}
+            id="vote-button"
+            class={likeness === 1 ? "active" : ""}
+            data-active={likeness === 1}
             onclick={() => {
                 likeness = likeness > 0 ? 0 : 1;
                 likePost({ id: post.id, likeness: likeness === 0 ? -1 : 1 });
             }}
         >
-            <!-- <ThumbsUp fill={likeness > 0 ? "#fff" : "#fff"} /> -->
-            <ThumbsUp fill="#62f700" />
+            <ChevronUp />
+            <!-- <ThumbsUp fill="#0000" /> -->
         </Button>
-        <!-- class:active={likeness === -1} -->
         <Button
-            id={likeness === -1 ? "active" : ""}
+            id="vote-button"
+            data-active={likeness === -1}
             onclick={() => {
                 likeness = likeness < 0 ? 0 : -1;
                 likePost({ id: post.id, likeness: likeness === 0 ? 1 : -1 });
             }}
         >
-            <!-- <ThumbsDown fill={likeness < 0 ? "#fff" : "#fff"} /> -->
-            <ThumbsDown fill="#e80000" />
+            <ChevronDown />
+            <!-- <ThumbsDown fill="#0000" /> -->
         </Button>
     </span>
 </div>
@@ -65,6 +77,13 @@
             margin: 15px;
             line-height: 0.92;
         }
+
+        /* & span { */
+        /*     border: var(--border); */
+        /*     box-shadow: var(--shadow-sm); */
+        /*     width: fit-content; */
+        /*     padding: 2px 4px; */
+        /* } */
         /* &:hover h1 { */
         /*     text-decoration: underline; */
         /* } */
@@ -79,25 +98,18 @@
         display: flex;
         gap: 8px;
     }
-    :global(#vote-button) {
-        filter: drop-shadow(2px 2px #000);
-        transition:
-            translate 0.2s ease,
-            filter 0.2s ease-in,
-            fill 0.2s ease-in;
-    }
-    :global(button:not(#active)) {
+    :global(#vote-button[data-active="false"]) {
         transition:
             translate 0.2s ease-out,
-            box-shadow 0.4s ease,
+            box-shadow 0.2s ease-out,
             background-color 0.2s ease;
     }
-    :global(#active) {
-        box-shadow: inset 0px 0px #000;
+    :global(#vote-button[data-active="true"]) {
+        box-shadow: 0px 0px #000;
         translate: 2px 2px;
         transition:
             translate 0.2s ease-out,
-            box-shadow 0.4s ease,
+            box-shadow 0.2s ease-out,
             background-color 0.2s ease;
 
         &:nth-child(1) {
