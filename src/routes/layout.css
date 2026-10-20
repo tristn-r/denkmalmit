@@ -9,6 +9,8 @@
 
     --col-bg: #b8f3ef;
     --col-bg: #fff;
+    --col-good: #62f700;
+    --col-bad: #e90000;
     /* --col-text: #1a2827; */
     --col-primary: #000;
     --col-secondary: #525252;
@@ -58,11 +60,11 @@ input,
 button {
     font-size: inherit;
     font-family: inherit;
+}
 
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
+button:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 button:focus:not(:focus-visible) {

@@ -13,7 +13,10 @@
             <p>Name <span class="optional">optional</span></p>
             <input type="text" class="form-input" />
         </label>
-        <Button type="submit">Frage absenden</Button>
+        <span class="form-buttons">
+            <Button type="button">Abbrechen</Button>
+            <Button type="submit">Frage absenden</Button>
+        </span>
     </ModalContentX>
 </Modal>
 
@@ -32,12 +35,33 @@
     .form-label {
         display: flex;
         flex-direction: column;
+        font-size: 1.2rem;
+        font-weight: 500;
     }
 
     .form-input {
-        font-size: 2rem;
         border: var(--border);
         box-shadow: var(--shadow);
+        border-radius: var(--rounded-md);
+        font-size: 2rem;
+        font-weight: 600;
+        padding: 4px 8px;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+
+    :global(.form-buttons) {
+        display: flex;
+        gap: 6px;
+
+        & button:nth-child(1) {
+            background-color: color(from var(--col-bad) srgb r g b / 0.6);
+        }
+        & button:nth-child(2) {
+            background-color: color(from var(--col-good) srgb r g b / 0.8);
+        }
     }
 
     .optional {

@@ -1,17 +1,6 @@
 <script lang="ts">
     import type { Post } from "#lib/database.types.js";
-    import {
-        ArrowDown,
-        ArrowUp,
-        ChevronDown,
-        ChevronUp,
-        CircleChevronDown,
-        CircleChevronUp,
-        SquareChevronDown,
-        SquareChevronUp,
-        ThumbsDown,
-        ThumbsUp,
-    } from "@lucide/svelte";
+    import { ChevronDown, ChevronUp } from "@lucide/svelte";
     import { likePost } from "#lib/remote/post.remote.js";
     import Button from "./Button.svelte";
 
@@ -39,7 +28,6 @@
     <span class="voting">
         <Button
             id="vote-button"
-            class={likeness === 1 ? "active" : ""}
             data-active={likeness === 1}
             onclick={() => {
                 likeness = likeness > 0 ? 0 : 1;
@@ -67,7 +55,7 @@
     .post {
         display: flex;
         flex-direction: column;
-        padding: 5px;
+        padding: 8px;
         border: var(--border);
         border-radius: var(--rounding);
         background-color: var(--col-bg);
@@ -113,10 +101,10 @@
             background-color 0.2s ease;
 
         &:nth-child(1) {
-            background-color: #62f700;
+            background-color: var(--col-good);
         }
         &:nth-child(2) {
-            background-color: #e80000;
+            background-color: var(--col-bad);
         }
     }
 
