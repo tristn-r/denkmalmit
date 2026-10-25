@@ -18,10 +18,9 @@
 </script>
 
 <div class="post">
-    {#if post.author}
+    <span class="header">
         <span class="author">{post.author}</span>
-    {/if}
-    <span class="time">
+        <span class="time"> </span>
         {time}
     </span>
     <h1>{post.text}</h1>
@@ -60,6 +59,7 @@
         border-radius: var(--rounding);
         background-color: var(--col-bg);
         box-shadow: 4px 4px #000;
+        width: 100%;
 
         & h1 {
             margin: 15px;
@@ -75,6 +75,14 @@
         /* &:hover h1 { */
         /*     text-decoration: underline; */
         /* } */
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .author {
+        font-weight: 500;
     }
 
     .time {

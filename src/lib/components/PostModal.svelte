@@ -37,7 +37,14 @@
                 ></textarea>
             </label>
             <span class="form-buttons">
-                <Button type="button">Abbrechen</Button>
+                <Button
+                    type="reset"
+                    onclick={(_) => {
+                        if (modalContent) modalContent.closeModal();
+                    }}
+                >
+                    Abbrechen
+                </Button>
                 <Button type="submit">Frage absenden</Button>
             </span>
         </form>
@@ -48,6 +55,8 @@
     :global(#post-form-trigger) {
         position: fixed;
         bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
         transition:
             translate 0.2s ease,
             box-shadow 0.2s ease;
