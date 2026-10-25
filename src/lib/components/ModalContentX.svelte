@@ -12,7 +12,6 @@
 
     const context = getModalContext();
     let modal: HTMLDialogElement | undefined = $state();
-    let screenHeight = $state(0);
 
     $effect(() => {
         if (!modal) return;
@@ -26,7 +25,7 @@
         modal.showModal();
     });
 
-    function closeModal() {
+    export function closeModal() {
         context.close();
         if (modal) modal.close();
     }
@@ -38,16 +37,14 @@
     }
 </script>
 
-<svelte:window onclick={handleClick} bind:innerHeight={screenHeight} />
+<svelte:window onclick={handleClick} />
 
 <div class="modal-backdrop"></div>
 <dialog bind:this={modal} class="modal">
     <Button id="close" onclick={(_) => closeModal()} type="button">
         <X size="2rem" color="var(--col-text)" />
     </Button>
-    <form id="modal-form" method="dialog">
-        {@render children?.()}
-    </form>
+    {@render children?.()}
 </dialog>
 
 <style>
@@ -61,7 +58,7 @@
         left: 0;
         right: 0;
         width: 100%;
-        padding: 0.4rem 0.8rem 0.8rem 0.8rem;
+        padding: 0.8rem;
         z-index: 1001;
         background-color: var(--col-bg);
         box-shadow: 0 -6px #000;
@@ -101,12 +98,6 @@
         position: absolute;
         top: 0.6rem;
         right: 0.8rem;
-    }
-
-    #modal-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
     }
 
     @media (min-width: 750px) {

@@ -1,27 +1,46 @@
 <script>
+    import { enhance } from "$app/forms";
     import Button from "./Button.svelte";
     import Modal from "./Modal.svelte";
     import ModalContentX from "./ModalContentX.svelte";
     import ModalTrigger from "./ModalTrigger.svelte";
+
+    let modalContent = $state();
 </script>
 
 <Modal>
     <ModalTrigger id="post-form-trigger">Frage stellen</ModalTrigger>
-    <ModalContentX>
-        <h1 style="line-height: 1;">Frage formulieren</h1>
-        <label class="form-label">
-            <p>Name <span class="optional">optional</span></p>
-            <input type="text" id="modal-input" class="form-input" />
-        </label>
-        <label class="form-label">
-            <p>Frage</p>
-            <!-- placeholder="Ihre Frage..." -->
-            <textarea id="modal-textarea" class="form-input"></textarea>
-        </label>
-        <span class="form-buttons">
-            <Button type="button">Abbrechen</Button>
-            <Button type="submit">Frage absenden</Button>
-        </span>
+    <ModalContentX bind:this={modalContent}>
+        <form
+            id="modal-form"
+            method="POST"
+            action="/post?/create"
+            use:enhance={() =>
+                async ({ update }) => {
+                    if (modalContent) modalContent.closeModal();
+                    await update({ navigate: false });
+                }}
+        >
+            <h1 style="line-height: 1;">Frage formulieren</h1>
+            <label class="form-label">
+                <p>Name <span class="optional">optional</span></p>
+                <input
+                    type="text"
+                    name="author"
+                    id="modal-input"
+                    class="form-input"
+                />
+            </label>
+            <label class="form-label">
+                <p>Frage</p>
+                <textarea name="text" id="modal-textarea" class="form-input"
+                ></textarea>
+            </label>
+            <span class="form-buttons">
+                <Button type="button">Abbrechen</Button>
+                <Button type="submit">Frage absenden</Button>
+            </span>
+        </form>
     </ModalContentX>
 </Modal>
 
@@ -37,6 +56,12 @@
             translate: 2px 2px;
             box-shadow: 0px 0px #000;
         }
+    }
+
+    #modal-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
     .form-label {
