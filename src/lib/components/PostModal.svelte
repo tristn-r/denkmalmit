@@ -8,10 +8,15 @@
 <Modal>
     <ModalTrigger id="post-form-trigger">Frage stellen</ModalTrigger>
     <ModalContentX>
-        <h1>Frage formulieren</h1>
+        <h1 style="line-height: 1;">Frage formulieren</h1>
         <label class="form-label">
             <p>Name <span class="optional">optional</span></p>
-            <input type="text" class="form-input" />
+            <input type="text" id="modal-input" class="form-input" />
+        </label>
+        <label class="form-label">
+            <p>Frage</p>
+            <!-- placeholder="Ihre Frage..." -->
+            <textarea id="modal-textarea" class="form-input"></textarea>
         </label>
         <span class="form-buttons">
             <Button type="button">Abbrechen</Button>
@@ -24,11 +29,13 @@
     :global(#post-form-trigger) {
         position: fixed;
         bottom: 30px;
-        transition: scale 0.15s ease-out;
+        transition:
+            translate 0.2s ease,
+            box-shadow 0.2s ease;
 
         &:active {
-            scale: 0.97;
-            outline: none;
+            translate: 2px 2px;
+            box-shadow: 0px 0px #000;
         }
     }
 
@@ -52,15 +59,23 @@
         }
     }
 
+    #modal-textarea {
+        height: 12rem;
+        resize: none;
+    }
+
     :global(.form-buttons) {
         display: flex;
-        gap: 6px;
+        justify-content: space-around;
+        gap: 12px;
 
         & button:nth-child(1) {
             background-color: color(from var(--col-bad) srgb r g b / 0.6);
+            flex: 1;
         }
         & button:nth-child(2) {
             background-color: color(from var(--col-good) srgb r g b / 0.8);
+            flex: 1;
         }
     }
 

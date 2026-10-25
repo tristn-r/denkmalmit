@@ -67,7 +67,6 @@
         box-shadow: 0 -6px #000;
         display: flex;
         flex-direction: column;
-        touch-action: none;
         transition: bottom 0.2s ease;
         margin: 0;
 
@@ -107,7 +106,7 @@
     #modal-form {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 20px;
     }
 
     @media (min-width: 750px) {
@@ -118,8 +117,8 @@
             left: 50%;
             transform: translate(-50%, -45%) scale(0.95);
             width: 750px;
-            height: 80%;
-            padding: 0.4rem 0.8rem;
+            /* height: 80%; */
+            padding: 0.8rem;
             opacity: 0;
             visibility: hidden;
             transition:
