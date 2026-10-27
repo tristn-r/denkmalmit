@@ -3,10 +3,14 @@
     import { ChevronDown, ChevronUp } from "@lucide/svelte";
     import { likePost } from "#lib/remote/post.remote.js";
     import Button from "./Button.svelte";
+    import { votedPosts } from "#lib/votedPosts.ts";
 
-    let { post }: { post: Post } = $props();
+    let { post, vote }: { post: Post; vote: number } = $props();
     let time = $state("");
-    let likeness = $state(0);
+
+    $effect(() => {
+        $votedPosts[post.id] = vote;
+    });
 
     $effect(() => {
         const date = new Date(post.time);
@@ -27,10 +31,10 @@
     <span class="voting">
         <Button
             id="vote-button"
-            data-active={likeness === 1}
+            data-active={vote === 1}
             onclick={() => {
-                likeness = likeness > 0 ? 0 : 1;
-                likePost({ id: post.id, likeness: likeness === 0 ? -1 : 1 });
+                vote = vote > 0 ? 0 : 1;
+                likePost({ id: post.id, likeness: vote === 0 ? -1 : 1 });
             }}
         >
             <ChevronUp />
@@ -38,10 +42,10 @@
         </Button>
         <Button
             id="vote-button"
-            data-active={likeness === -1}
+            data-active={vote === -1}
             onclick={() => {
-                likeness = likeness < 0 ? 0 : -1;
-                likePost({ id: post.id, likeness: likeness === 0 ? 1 : -1 });
+                vote = vote < 0 ? 0 : -1;
+                likePost({ id: post.id, likeness: vote === 0 ? 1 : -1 });
             }}
         >
             <ChevronDown />

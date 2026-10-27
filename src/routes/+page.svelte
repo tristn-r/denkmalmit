@@ -9,8 +9,11 @@
     import Button from "#lib/components/Button.svelte";
     import { ArrowUp } from "@lucide/svelte";
 
+    import { votedPosts } from "#lib/votedPosts.ts";
+
     const { data }: PageProps = $props();
 
+    // svelte-ignore state_referenced_locally
     let posts = $state(
         data.posts.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)),
     );
@@ -97,7 +100,7 @@
     <div class="posts">
         {#each posts as post (post.id)}
             <div class="post-wrapper" animate:flip={{ duration: 300 }}>
-                <PostComponent {post} />
+                <PostComponent {post} vote={$votedPosts[post.id]} />
             </div>
         {/each}
     </div>
