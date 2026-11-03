@@ -29,11 +29,16 @@
                     name="author"
                     id="modal-input"
                     class="form-input"
+                    maxlength="40"
                 />
             </label>
             <label class="form-label">
                 <p>Frage</p>
-                <textarea name="text" id="modal-textarea" class="form-input"
+                <textarea
+                    required
+                    name="text"
+                    id="modal-textarea"
+                    class="form-input"
                 ></textarea>
             </label>
             <span class="form-buttons">
