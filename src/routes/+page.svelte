@@ -7,7 +7,7 @@
     import { flip } from "svelte/animate";
     import PostModal from "#lib/components/PostModal.svelte";
     import Button from "#lib/components/Button.svelte";
-    import { ArrowUp } from "@lucide/svelte";
+    import { ListSortDescending } from "@lucide/svelte";
 
     import { votedPosts } from "#lib/votedPosts.ts";
 
@@ -33,6 +33,7 @@
                 },
                 (payload) => {
                     posts = [payload.new as Post, ...posts];
+                    sortPosts();
                 },
             )
             .on(
@@ -47,6 +48,7 @@
                         (post) => post.id === payload.old.id,
                     );
                     posts[idx] = payload.new as Post;
+                    sortPosts();
                 },
             )
             .on(
@@ -58,6 +60,7 @@
                 },
                 (payload) => {
                     posts = posts.filter((post) => post.id != payload.old.id);
+                    // sortPosts();
                 },
             )
             .subscribe();
@@ -90,7 +93,7 @@
 <section>
     <span class="sorting">
         <Button onclick={reverse}>
-            <ArrowUp class="sort-arrow" data-reversed={reversed} />
+            <ListSortDescending class="sort-arrow" data-reversed={reversed} />
         </Button>
         <select class="sort-select" bind:value={sortOrder} onchange={sortPosts}>
             <option value="time">Zeit</option>
@@ -133,6 +136,7 @@
         border-radius: var(--rounded-md);
         box-shadow: var(--shadow);
         background-color: var(--col-bg);
+        padding: 0.25rem 0.5rem;
 
         &:focus-visible {
             outline: none;
@@ -140,10 +144,11 @@
     }
 
     :global(.sort-arrow) {
-        transition: rotate 0.2s ease-out;
+        transition: transform 0.2s ease-out;
 
         &[data-reversed="true"] {
-            rotate: 0.5turn;
+            /* rotate: 0.5turn; */
+            transform: scaleY(-1);
         }
     }
 </style>
