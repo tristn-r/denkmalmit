@@ -1,12 +1,12 @@
 <script lang="ts">
+    import PostComponent from "#lib/components/post/Post.svelte";
+    import PostModal from "#lib/components/modal/PostModal.svelte";
+    import Button from "#lib/components/button/Button.svelte";
     import type { PageProps } from "./$types";
     import type { Post } from "#lib/database.types.js";
-    import PostComponent from "#lib/components/Post.svelte";
     import { db } from "#lib/db.js";
     import { onMount } from "svelte";
     import { flip } from "svelte/animate";
-    import PostModal from "#lib/components/PostModal.svelte";
-    import Button from "#lib/components/Button.svelte";
     import { ListSortDescending } from "@lucide/svelte";
 
     import { votedPosts, sorting } from "#lib/storage.ts";

@@ -73,36 +73,8 @@
         display: flex;
         gap: 8px;
     }
-    :global(#vote-button[data-active="false"]) {
-        transition:
-            translate 0.2s ease-out,
-            box-shadow 0.2s ease-out,
-            background-color 0.2s ease;
+    :global(#delete-button) {
+        transition: background-color 0.2s ease;
+        background-color: var(--col-bad);
     }
-    :global(#vote-button[data-active="true"]) {
-        box-shadow: 0px 0px #000;
-        translate: 2px 2px;
-        transition:
-            translate 0.2s ease-out,
-            box-shadow 0.2s ease-out,
-            background-color 0.2s ease;
-
-        &:nth-child(1) {
-            background-color: var(--col-good);
-        }
-        &:nth-child(2) {
-            background-color: var(--col-bad);
-        }
-    }
-
-    /* @keyframes like { */
-    /*     50% { */
-    /*         transform: translateY(-1rem); */
-    /*     } */
-    /* } */
-    /* @keyframes unlike { */
-    /*     50% { */
-    /*         transform: translateY(1rem); */
-    /*     } */
-    /* } */
 </style>
