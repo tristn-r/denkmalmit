@@ -3,7 +3,7 @@
     import { ChevronDown, ChevronUp } from "@lucide/svelte";
     import { likePost } from "#lib/remote/post.remote.js";
     import Button from "./Button.svelte";
-    import { votedPosts } from "#lib/votedPosts.ts";
+    import { votedPosts } from "#lib/storage.ts";
 
     let { post, vote }: { post: Post; vote: number } = $props();
     let time = $state("");

@@ -9,17 +9,13 @@
     import Button from "#lib/components/Button.svelte";
     import { ListSortDescending } from "@lucide/svelte";
 
-    import { votedPosts } from "#lib/votedPosts.ts";
+    import { votedPosts, sorting } from "#lib/storage.ts";
 
     const { data }: PageProps = $props();
 
     // svelte-ignore state_referenced_locally
-    let posts = $state(
-        data.posts.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)),
-    );
-
-    let reversed = $state(false);
-    let sortOrder = $state("time");
+    let posts = $state(data.posts);
+    sortPosts();
 
     onMount(() => {
         const channel = db
@@ -71,17 +67,19 @@
     });
 
     const reverse = () => {
-        reversed = !reversed;
+        $sorting.reversed = !$sorting.reversed;
         posts.reverse();
     };
 
     function sortPosts() {
-        if (sortOrder === "time")
+        if ($sorting.criteria === "time")
             posts.sort((a, b) => {
                 return Date.parse(b.time) - Date.parse(a.time);
             });
-        else if (sortOrder === "relevance")
+        else if ($sorting.criteria === "relevance")
             posts.sort((a, b) => b.relevance - a.relevance);
+
+        if ($sorting.reversed) posts.reverse();
     }
 </script>
 
@@ -93,9 +91,16 @@
 <section>
     <span class="sorting">
         <Button onclick={reverse}>
-            <ListSortDescending class="sort-arrow" data-reversed={reversed} />
+            <ListSortDescending
+                class="sort-arrow"
+                data-reversed={$sorting.reversed}
+            />
         </Button>
-        <select class="sort-select" bind:value={sortOrder} onchange={sortPosts}>
+        <select
+            class="sort-select"
+            bind:value={$sorting.criteria}
+            onchange={sortPosts}
+        >
             <option value="time">Zeit</option>
             <option value="relevance">Relevanz</option>
         </select>
