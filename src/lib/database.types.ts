@@ -8,6 +8,15 @@ export type Post = {
     time: string;
 };
 
+export type Poll = {
+    id: number;
+    text: string;
+    active: boolean;
+    created_at: string;
+    ja: number;
+    nein: number;
+};
+
 export type Database = {
     // Allows to automatically instantiate createClient with right options
     // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)

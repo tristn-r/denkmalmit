@@ -6,7 +6,7 @@
     import Card from "../card/Card.svelte";
     import CardHeader from "../card/CardHeader.svelte";
     import CardContent from "../card/CardContent.svelte";
-    import CardButtons from "../card/CardButtons.svelte";
+    import CardFooter from "../card/CardFooter.svelte";
 
     let { post }: { post: Post } = $props();
 
@@ -23,7 +23,7 @@
         <span class="time">{time}</span>
     </CardHeader>
     <CardContent><h1 class="text">{post.text}</h1></CardContent>
-    <CardButtons>
+    <CardFooter>
         <Button
             id="delete-button"
             onclick={() => {
@@ -32,7 +32,7 @@
         >
             <Trash />
         </Button>
-    </CardButtons>
+    </CardFooter>
 </Card>
 
 <style>

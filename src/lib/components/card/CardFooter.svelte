@@ -1,16 +1,17 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
 
-    let { children }: { children: Snippet } = $props();
+    let { children }: { children?: Snippet } = $props();
 </script>
 
-<div class="card-buttons">
+<div class="card-footer">
     {@render children?.()}
 </div>
 
 <style>
-    .card-buttons {
+    .card-footer {
         display: flex;
+        align-items: center;
         gap: 8px;
     }
 </style>

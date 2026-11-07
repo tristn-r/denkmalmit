@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
 
-    let { children }: { children: Snippet } = $props();
+    let { children }: { children?: Snippet } = $props();
 </script>
 
 <div class="card-content">
@@ -9,8 +9,8 @@
 </div>
 
 <style>
-.card-content {
-    margin: 15px;
-    margin-top: 10px;
-}
+    .card-content {
+        margin: 15px;
+        margin-top: 10px;
+    }
 </style>
