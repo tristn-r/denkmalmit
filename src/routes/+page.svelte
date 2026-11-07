@@ -3,19 +3,23 @@
     import PostModal from "#lib/components/modal/PostModal.svelte";
     import Button from "#lib/components/button/Button.svelte";
     import type { PageProps } from "./$types";
-    import type { Post } from "#lib/database.types.js";
+    import type { Poll, Post } from "#lib/database.types.js";
     import { db } from "#lib/db.js";
     import { onMount } from "svelte";
     import { flip } from "svelte/animate";
     import { ListSortDescending } from "@lucide/svelte";
 
     import { votedPosts, sorting } from "#lib/storage.ts";
+    import Alert from "#lib/components/alert/Alert.svelte";
 
     const { data }: PageProps = $props();
 
     // svelte-ignore state_referenced_locally
-    let posts = $state(data.posts);
+    let posts: Post[] = $state(data.posts);
     sortPosts();
+
+    // svelte-ignore state_referenced_locally
+    let activePoll: Poll | null = $state(data.poll);
 
     onMount(() => {
         const channel = db
@@ -59,6 +63,34 @@
                     // sortPosts();
                 },
             )
+            // polls
+            .on(
+                "postgres_changes",
+                {
+                    event: "INSERT",
+                    schema: "public",
+                    table: "polls",
+                },
+                (payload) => {
+                    activePoll = payload.new as Poll;
+                },
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event: "UPDATE",
+                    schema: "public",
+                    table: "polls",
+                },
+                (payload) => {
+                    if (
+                        activePoll &&
+                        activePoll.id === payload.new.id &&
+                        payload.new.active === false
+                    )
+                        activePoll = null;
+                },
+            )
             .subscribe();
 
         return () => {
@@ -89,6 +121,9 @@
 </svelte:head>
 
 <section>
+    {#if activePoll}
+        <Alert poll={activePoll} />
+    {/if}
     <span class="sorting">
         <Button onclick={reverse}>
             <ListSortDescending

@@ -58,7 +58,7 @@
         left: 0;
         right: 0;
         width: 100vw;
-        padding: 0.8rem;
+        padding: 1.2rem 0.8rem;
         z-index: 1001;
         background-color: var(--col-bg);
         box-shadow: 0 -6px #000;
@@ -109,7 +109,7 @@
             transform: translate(-50%, -45%) scale(0.95);
             width: 750px;
             /* height: 80%; */
-            padding: 0.8rem;
+        padding: 1.2rem 0.8rem;
             opacity: 0;
             visibility: hidden;
             transition:

@@ -107,14 +107,13 @@
         display: flex;
         justify-content: space-around;
         gap: 12px;
+        color: #fff;
 
         & button:nth-child(1) {
-            background-color: color(from var(--col-bad) srgb r g b / 0.6);
             background-color: var(--col-bad);
             flex: 1;
         }
         & button:nth-child(2) {
-            background-color: color(from var(--col-good) srgb r g b / 0.8);
             background-color: var(--col-good);
             flex: 1;
         }

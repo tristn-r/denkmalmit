@@ -9,15 +9,22 @@ export const actions = {
 
         if (z.string(text)) {
             const result = await db.from("polls").insert({ text }).select();
-            if (result.data && result.data.length)
-                db.channel("poll").send({
-                    type: "broadcast",
-                    event: "new_poll",
-                    payload: { poll_id: result.data[0].id },
-                });
+            // if (result.data && result.data.length)
+            //     db.channel("poll").send({
+            //         type: "broadcast",
+            //         event: "new_poll",
+            //         payload: { poll_id: result.data[0].id },
+            //     });
 
             return { success: result.success, error: result.error };
         }
         return { success: false, error: "Not enough data" };
     },
+    // submit: async (e) => {
+    //     const data = await e.request.formData();
+    //     const col = Number(data.get("response")) ? "ja" : "nein";
+    //     const current = await db.from("polls").select(col).eq("id", id);
+    //     console.log(current);
+    //     const result = await db.from("polls").update({ active: false }).eq("id", id);
+    // },
 } satisfies Actions;

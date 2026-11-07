@@ -13,6 +13,7 @@
     import Card from "#lib/components/card/Card.svelte";
     import CardContent from "#lib/components/card/CardContent.svelte";
     import CardFooter from "#lib/components/card/CardFooter.svelte";
+    import { endPoll } from "#lib/remote/poll.remote.ts";
 
     const { data }: PageProps = $props();
     let listType = $state("posts");
@@ -135,7 +136,11 @@
 
 <section>
     {#if data.isAdmin}
-        <select class="select" bind:value={listType} style="position: absolute;">
+        <select
+            class="select"
+            bind:value={listType}
+            style="position: absolute;"
+        >
             <option value="posts">Posts</option>
             <option value="polls">Polls</option>
         </select>
@@ -187,6 +192,9 @@
                                 {#if poll.active}
                                     <Button
                                         style="background-color: var(--col-bad);"
+                                        onclick={(_) => {
+                                            endPoll({ id: poll.id });
+                                        }}
                                     >
                                         <Ban />
                                     </Button>
