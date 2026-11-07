@@ -9,7 +9,7 @@
     import { flip } from "svelte/animate";
     import { ListSortDescending } from "@lucide/svelte";
 
-    import { votedPosts, sorting } from "#lib/storage.ts";
+    import { votedPosts, sorting, takenPolls } from "#lib/storage.ts";
     import Alert from "#lib/components/alert/Alert.svelte";
 
     const { data }: PageProps = $props();
@@ -20,6 +20,12 @@
 
     // svelte-ignore state_referenced_locally
     let activePoll: Poll | null = $state(data.poll);
+
+    $effect(() => {
+        if (activePoll && $takenPolls.includes(activePoll.id)) {
+            activePoll = null;
+        }
+    });
 
     onMount(() => {
         const channel = db
@@ -121,9 +127,7 @@
 </svelte:head>
 
 <section>
-    {#if activePoll}
-        <Alert poll={activePoll} />
-    {/if}
+        <Alert poll={activePoll} visible={!!activePoll} />
     <span class="sorting">
         <Button onclick={reverse}>
             <ListSortDescending

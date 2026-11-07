@@ -95,10 +95,6 @@
         }
     }
 
-    .form-select {
-        padding: 8px 12px;
-    }
-
     #modal-textarea {
         height: 12rem;
         resize: none;

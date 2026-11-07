@@ -10,9 +10,13 @@ let initialSorting =
     browser && localStorage.getItem("sorting")
         ? JSON.parse(localStorage.getItem("sorting") ?? "{}")
         : { reversed: false, criteria: "time" };
+let initialTakenPolls: number[] = browser
+    ? JSON.parse(localStorage.getItem("taken_polls") ?? "[]")
+    : [];
 
 export const votedPosts = writable(initialPosts);
 export const sorting = writable(initialSorting);
+export const takenPolls = writable(initialTakenPolls);
 
 if (browser) {
     votedPosts.subscribe((value) => {
@@ -20,5 +24,8 @@ if (browser) {
     });
     sorting.subscribe((value) => {
         localStorage.setItem("sorting", JSON.stringify(value));
+    });
+    takenPolls.subscribe((value) => {
+        localStorage.setItem("taken_polls", JSON.stringify(value));
     });
 }
