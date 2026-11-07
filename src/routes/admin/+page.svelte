@@ -1,6 +1,5 @@
 <script lang="ts">
     import DeletablePost from "#lib/components/post/DeletablePost.svelte";
-    import PostModal from "#lib/components/modal/PostModal.svelte";
     import Button from "#lib/components/button/Button.svelte";
     import { db } from "#lib/db.js";
     import type { Post } from "#lib/database.types.js";
@@ -10,6 +9,7 @@
     import { ListSortDescending } from "@lucide/svelte";
 
     import { sorting } from "#lib/storage.ts";
+    import PollModal from "#lib/components/modal/PollModal.svelte";
 
     const { data }: PageProps = $props();
 
@@ -114,6 +114,7 @@
             {/each}
         </div>
     {/if}
+    <PollModal />
 </section>
 
 <style>

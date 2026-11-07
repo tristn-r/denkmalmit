@@ -7,15 +7,14 @@
         "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-heading: "Space Grotesk Variable", "Geist Variable", Roboto, sans-serif;
 
-    --col-bg: #b8f3ef;
+    /* --col-body: #b8f3ef; */
+    --col-body: #a7dcd8;
     --col-bg: #fff;
-    --col-good: #62f700;
-    --col-bad: #e90000;
-    /* --col-text: #1a2827; */
-    --col-primary: #000;
-    --col-secondary: #525252;
+    --col-good: #2eff2e;
+    --col-bad: #ff4910;
+    --col-primary: #111;
+    --col-secondary: #434343;
     --col-text: var(--col-primary);
-    --col-fill: color(from var(--col-text) srgb r g b / 0.925);
 
     --border-width: 2px;
     --border-style: solid;
@@ -46,7 +45,7 @@
 body {
     min-height: 100vh;
     background-attachment: fixed;
-    background-color: #b8f3ef;
+    background-color: var(--col-body);
     background-size: 100vw 100vh;
 }
 

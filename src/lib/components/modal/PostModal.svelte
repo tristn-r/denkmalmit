@@ -9,7 +9,7 @@
 </script>
 
 <Modal>
-    <ModalTrigger id="post-form-trigger">Frage stellen</ModalTrigger>
+    <ModalTrigger id="form-trigger">Frage stellen</ModalTrigger>
     <ModalContentX bind:this={modalContent}>
         <form
             id="modal-form"
@@ -57,7 +57,7 @@
 </Modal>
 
 <style>
-    :global(#post-form-trigger) {
+    :global(#form-trigger) {
         position: fixed;
         bottom: 30px;
         left: 50%;
@@ -110,10 +110,12 @@
 
         & button:nth-child(1) {
             background-color: color(from var(--col-bad) srgb r g b / 0.6);
+            background-color: var(--col-bad);
             flex: 1;
         }
         & button:nth-child(2) {
             background-color: color(from var(--col-good) srgb r g b / 0.8);
+            background-color: var(--col-good);
             flex: 1;
         }
     }

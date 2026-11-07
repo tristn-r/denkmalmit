@@ -1,5 +1,5 @@
 <script lang="ts">
-    import PostComponent from "#lib/components/post/Post.svelte";
+    import PostComponent from "#lib/components/post/Post2.svelte";
     import PostModal from "#lib/components/modal/PostModal.svelte";
     import Button from "#lib/components/button/Button.svelte";
     import type { PageProps } from "./$types";

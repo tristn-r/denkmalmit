@@ -6,28 +6,24 @@
     import { votedPosts } from "#lib/storage.ts";
 
     let { post, vote = 0 }: { post: Post; vote?: number } = $props();
-    let time = $state("");
+
+    let time = $derived(
+        String(new Date(post.time).getHours()).padStart(2, "0") +
+            ":" +
+            String(new Date(post.time).getMinutes()).padStart(2, "0"),
+    );
 
     $effect(() => {
         $votedPosts[post.id] = vote;
-    });
-
-    $effect(() => {
-        const date = new Date(post.time);
-        time =
-            String(date.getHours()).padStart(2, "0") +
-            ":" +
-            String(date.getMinutes()).padStart(2, "0");
     });
 </script>
 
 <div class="post" lang="de">
     <span class="header">
         <span class="author">{post.author}</span>
-        <span class="time"> </span>
-        {time}
+        <span class="time">{time}</span>
     </span>
-    <h1>{post.text}</h1>
+    <h1 class="text">{post.text}</h1>
     <span class="voting">
         <Button
             id="vote-button"
@@ -66,11 +62,12 @@
         hyphens: auto;
         hyphenate-limit-chars: 14 5 5;
         overflow-wrap: break-word;
+    }
 
-        & h1 {
-            margin: 15px;
-            line-height: 0.92;
-        }
+    .text {
+        margin: 15px;
+        margin-top: 10px;
+        line-height: 0.92;
     }
 
     .header {
@@ -79,11 +76,11 @@
     }
     .author {
         font-weight: 500;
+        font-size: 1.2rem;
     }
 
     .time {
-        position: absolute;
-        align-self: end;
+        font-size: 1.2rem;
     }
 
     .voting {

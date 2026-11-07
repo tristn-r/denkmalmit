@@ -3,27 +3,27 @@
     import type { Post } from "#lib/database.types.js";
     import { deletePost } from "#lib/remote/post.remote.ts";
     import { Trash } from "@lucide/svelte";
+    import Card from "../card/Card.svelte";
+    import CardHeader from "../card/CardHeader.svelte";
+    import CardContent from "../card/CardContent.svelte";
+    import CardButtons from "../card/CardButtons.svelte";
 
     let { post }: { post: Post } = $props();
-    let time = $state("");
 
-    $effect(() => {
-        const date = new Date(post.time);
-        time =
-            String(date.getHours()).padStart(2, "0") +
+    let time = $derived(
+        String(new Date(post.time).getHours()).padStart(2, "0") +
             ":" +
-            String(date.getMinutes()).padStart(2, "0");
-    });
+            String(new Date(post.time).getMinutes()).padStart(2, "0"),
+    );
 </script>
 
-<div class="post" lang="de">
-    <span class="header">
+<Card>
+    <CardHeader>
         <span class="author">{post.author}</span>
-        <span class="time"> </span>
-        {time}
-    </span>
-    <h1>{post.text}</h1>
-    <span class="voting">
+        <span class="time">{time}</span>
+    </CardHeader>
+    <CardContent><h1 class="text">{post.text}</h1></CardContent>
+    <CardButtons>
         <Button
             id="delete-button"
             onclick={() => {
@@ -32,47 +32,26 @@
         >
             <Trash />
         </Button>
-    </span>
-</div>
+    </CardButtons>
+</Card>
 
 <style>
-    .post {
-        display: flex;
-        flex-direction: column;
-        padding: 8px;
-        border: var(--border);
-        border-radius: var(--rounding);
-        background-color: var(--col-bg);
-        box-shadow: 4px 4px #000;
-        width: 100%;
-
+    .text {
+        line-height: 0.92;
         hyphens: auto;
         hyphenate-limit-chars: 14 5 5;
         overflow-wrap: break-word;
-
-        & h1 {
-            margin: 15px;
-            line-height: 0.92;
-        }
     }
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-    }
     .author {
+        font-size: 1.2rem;
         font-weight: 500;
     }
 
     .time {
-        position: absolute;
-        align-self: end;
+        font-size: 1.2rem;
     }
 
-    .voting {
-        display: flex;
-        gap: 8px;
-    }
     :global(#delete-button) {
         transition: background-color 0.2s ease;
         background-color: var(--col-bad);

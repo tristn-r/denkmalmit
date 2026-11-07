@@ -16,6 +16,33 @@ export type Database = {
     };
     public: {
         Tables: {
+            polls: {
+                Row: {
+                    active: boolean;
+                    created_at: string;
+                    id: number;
+                    ja: number;
+                    nein: number;
+                    text: string;
+                };
+                Insert: {
+                    active?: boolean;
+                    created_at?: string;
+                    id?: number;
+                    ja?: number;
+                    nein?: number;
+                    text?: string;
+                };
+                Update: {
+                    active?: boolean;
+                    created_at?: string;
+                    id?: number;
+                    ja?: number;
+                    nein?: number;
+                    text?: string;
+                };
+                Relationships: [];
+            };
             posts: {
                 Row: {
                     author: string;
@@ -39,6 +66,35 @@ export type Database = {
                     time?: string;
                 };
                 Relationships: [];
+            };
+            responses: {
+                Row: {
+                    created_at: string;
+                    id: number;
+                    poll_id: number;
+                    value: boolean;
+                };
+                Insert: {
+                    created_at?: string;
+                    id?: number;
+                    poll_id: number;
+                    value: boolean;
+                };
+                Update: {
+                    created_at?: string;
+                    id?: number;
+                    poll_id?: number;
+                    value?: boolean;
+                };
+                Relationships: [
+                    {
+                        foreignKeyName: "responses_poll_id_fkey";
+                        columns: ["poll_id"];
+                        isOneToOne: false;
+                        referencedRelation: "polls";
+                        referencedColumns: ["id"];
+                    },
+                ];
             };
         };
         Views: {

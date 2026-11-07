@@ -11,8 +11,7 @@ export const actions = {
         if (z.string(author) && z.string(text)) {
             const result = await db.from("posts").insert({ author, text });
 
-            if (result.success) return { success: true };
-            return { success: false, error: result.error };
+            return { success: result.success, error: result.error };
         }
         return { success: false, error: "Not enough data" };
     },
