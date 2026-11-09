@@ -11,6 +11,7 @@
 
     import { votedPosts, sorting, takenPolls } from "#lib/storage.ts";
     import Alert from "#lib/components/alert/Alert.svelte";
+    import Logo from "#lib/components/logo/Logo.svelte";
 
     const { data }: PageProps = $props();
 
@@ -121,11 +122,7 @@
     }
 </script>
 
-<svelte:head>
-    <title>DenkMal</title>
-    <meta name="description" content="DenkMal Mit Seite" />
-</svelte:head>
-
+<Logo />
 <section>
     <Alert poll={activePoll} visible={!!activePoll} />
     <span class="sorting">

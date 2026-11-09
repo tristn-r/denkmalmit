@@ -14,6 +14,7 @@
     import CardContent from "#lib/components/card/CardContent.svelte";
     import CardFooter from "#lib/components/card/CardFooter.svelte";
     import { endPoll } from "#lib/remote/poll.remote.ts";
+    import Logo from "#lib/components/logo/Logo.svelte";
 
     const { data }: PageProps = $props();
     let listType = $state("posts");
@@ -134,6 +135,7 @@
     <meta name="description" content="DenkMal Mit Seite" />
 </svelte:head>
 
+<Logo />
 <section>
     {#if data.isAdmin}
         <select

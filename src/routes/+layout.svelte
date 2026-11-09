@@ -1,9 +1,16 @@
 <script lang="ts">
+    import Logo from "#lib/components/logo/Logo.svelte";
     import "./layout.css";
     import { type Snippet } from "svelte";
     let { children }: { children: Snippet } = $props();
 </script>
 
+<svelte:head>
+    <title>DenkMal</title>
+    <meta name="description" content="DenkMal Mit Seite" />
+</svelte:head>
+
+<!-- <Logo /> -->
 <div class="app">
     <main>
         {@render children()}
