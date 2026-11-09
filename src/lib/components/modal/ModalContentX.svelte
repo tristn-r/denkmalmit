@@ -109,7 +109,7 @@
             transform: translate(-50%, -45%) scale(0.95);
             width: 750px;
             /* height: 80%; */
-        padding: 1.2rem 0.8rem;
+            padding: 1.2rem 0.8rem;
             opacity: 0;
             visibility: hidden;
             transition:

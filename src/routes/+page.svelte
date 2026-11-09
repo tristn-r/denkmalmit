@@ -127,7 +127,7 @@
 </svelte:head>
 
 <section>
-        <Alert poll={activePoll} visible={!!activePoll} />
+    <Alert poll={activePoll} visible={!!activePoll} />
     <span class="sorting">
         <Button onclick={reverse}>
             <ListSortDescending

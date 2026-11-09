@@ -1,10 +1,10 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
 
-    let { children }: { children?: Snippet } = $props();
+    let { children, id }: { children?: Snippet; id?: string } = $props();
 </script>
 
-<div class="card" lang="de">
+<div class="card" lang="de" {id}>
     {@render children?.()}
 </div>
 

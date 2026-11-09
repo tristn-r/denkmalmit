@@ -172,7 +172,9 @@
                     <div class="post-wrapper" animate:flip={{ duration: 300 }}>
                         <Card>
                             <CardContent>
-                                <h1 class="poll-text">{poll.text}</h1>
+                                <a href={"/poll/" + poll.id}>
+                                    <h1 class="poll-text">{poll.text}</h1>
+                                </a>
                             </CardContent>
                             <CardFooter>
                                 <span
