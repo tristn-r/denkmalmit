@@ -44,7 +44,7 @@
         </div>
         <div
             class="response-bar"
-            data-progress={poll.nein / (poll.ja + poll.nein)}
+            style:--progress="{(poll.nein / (poll.ja + poll.nein)) * 100}%"
         ></div>
     {/if}
 </Card>
@@ -86,7 +86,7 @@
         &::after {
             content: "";
             display: block;
-            width: calc(100% * attr(data-progress number));
+            width: var(--progress);
             height: 100%;
             background-color: var(--col-bad);
             transition: width 0.4s ease-out;
